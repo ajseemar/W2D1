@@ -28,12 +28,23 @@ class Board
     main_pieces = %w(rook knight bishop queen king bishop knight rook)
     main_pieces.each_with_index { |piece, idx| @grid[0][idx] = Piece.new(piece, [0, idx]) }
     main_pieces.each_with_index { |piece, idx| @grid[7][idx] = Piece.new(piece, [7, idx]) }
+    # null pieces
+    (2..5).each do |i|
+      (0..7).each do |j|
+        self[[i, j]] = NullPiece.instance
+      end
+    end
   end
 
   def move_piece(start_pos, end_pos)
     current_piece = self[start_pos]
     # raise if NullPiece === current_piece || self[end_pos].class != NullPiece 
     self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
+  end
+
+  def valid_pos?(pos)
+    return nil unless row_f.between?(0, 7)
+    return nil unless col_f.between?(0, 7)
   end
 
 end
