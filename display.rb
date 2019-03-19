@@ -1,5 +1,6 @@
 require 'paint'
 require_relative 'cursor'
+require 'board.rb'
 
 class Display
 
